@@ -1,6 +1,8 @@
-from flask import Flask, render_template, request, redirect, url_for, session
-from model import user, income, expense
 from connection import sessions, database
+from flask import Flask, render_template, request, redirect, url_for, session
+import json
+from model import user, income, expense
+import os
 from sqlalchemy import select
 
 app = Flask(__name__)
@@ -15,14 +17,40 @@ def home():
 @app.route("/createaccount", methods=["GET", "POST"])
 def createaccount():
     
-    fname = request.form['fname']
-    lname = request.form['lname']
-    email = request.form['email']
-    password = request.form['psw']
-    users = user(fname, lname, email, password)
+    if request.method == 'POST':
 
-    sessions.add(users)
-    sessions.commit()
+        fname = request.form['fname']
+        lname = request.form['lname']
+        email = request.form['email']
+        password = request.form['psw']
+        users = user(fname, lname, email, password)
+
+        sessions.add(users)
+        sessions.commit()
+
+        user_data = {
+            'id': users.id,
+            'fname': users.fname,
+            'lname': users.lname,
+            'email': users.email,
+            'password': users.password
+        }
+        
+        # Check if the JSON file exists
+        if os.path.exists('user_data.json'):
+            # Load existing user data from the JSON file
+            with open('user_data.json', 'r') as json_file:
+                existing_data = json.load(json_file)
+        else:
+            existing_data = []
+
+        # Append new user data to the existing data
+        existing_data.append(user_data)
+
+        # Save the updated data to the JSON file
+        with open('user_data.json', 'w') as json_file:
+            json.dump(existing_data, json_file)
+        return redirect(url_for('login'))
 
     return render_template("createaccount.html")
 
@@ -42,8 +70,6 @@ def login():
                 return redirect(url_for('welcome'))
             else:
                 return render_template('login.html', error="Invalis email or password please enter agin ")
-    elif "create_button" in request.form:
-        return redirect(url_for('createaccount'))
 
     return render_template("login.html")
 
@@ -71,7 +97,30 @@ def startplaning():
 
         sessions.add(incomes)
         sessions.commit()
-    elif 'expense_button' in request.form:
+
+        incomes_data = {
+            'id': incomes.id,
+            'user_id': incomes.userid,
+            'category': incomes.category,
+            'amount': incomes.amount
+        }
+
+        # Check if the JSON file exists
+        if os.path.exists('income_data.json'):
+            # Load existing income data from the JSON file
+            with open('income_data.json', 'r') as json_file:
+                existing_data = json.load(json_file)
+        else:
+            existing_data = []
+
+        # Append new income data to the existing data
+        existing_data.append(incomes_data)
+
+        # Save the updated data to the JSON file
+        with open('income_data.json', 'w') as json_file:
+            json.dump(existing_data, json_file)
+
+    if 'expense_button' in request.form:
 
         category_e = request.form['expense_category']
         amount_e = request.form['amount_expense'] 
@@ -79,6 +128,27 @@ def startplaning():
 
         sessions.add(expenses)
         sessions.commit()
+
+        expenses_data = {
+            'id': expenses.id,
+            'user_id': expenses.userid,
+            'category': expenses.category,
+            'amount': expenses.amount
+        }
+        # Check if the JSON file exists
+        if os.path.exists('expense_data.json'):
+            # Load existing expense data from the JSON file
+            with open('expense_data.json', 'r') as json_file:
+                existing_data = json.load(json_file)
+        else:
+            existing_data = []
+
+        # Append new expense data to the existing data
+        existing_data.append(expenses_data)
+
+        # Save the updated data to the JSON file
+        with open('expense_data.json', 'w') as json_file:
+            json.dump(existing_data, json_file)
 
     return render_template("startplaning.html", name=name)
     
