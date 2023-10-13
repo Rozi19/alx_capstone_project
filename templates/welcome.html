@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}
+    Welcome page
+{% endblock %}
+
+{% block content %}
+    <h1> welcome {{ name }} {{ id }}</h1>
+    <a href="{{ url_for('startplaning') }}"><button>plan</button></a>
+    <a href="{{ url_for('logout') }}"><button>logout</button></a>
+
+{% endblock %}
