@@ -1,0 +1,35 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    height: 650px;
+}
+.creat_account{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f8f9fa;
+    border: 1px solid #e7e7e7;
+    padding: 50px;
+    
+}
+.budget{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 70px;
+}
+.same{
+    background-color: #f8f9fa;
+    border: 1px solid #e7e7e7;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    height: 250px;
+}
+
+
