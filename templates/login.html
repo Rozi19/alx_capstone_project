@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}
+    Login page
+{% endblock %}
+
+{% block content %}
+   
+    <form action="#" method="POST">
+    <div>
+        <lable for="email">Email</lable>
+        <input type="email" id="email" name="email" placeholder="Enter your email" ><br><br>
+    </div>
+
+    <div>
+        <lable for="password">Password</lable>
+        <input type="password" id="psw" name="password" placeholder="Enter Your password" ><br>
+    </div>
+
+    <button type="submit" name="login_button">LOGIN</button>
+    </form>
+    <a href="{{ url_for('creataccount') }}"><button name="create_button">Create new account</button></a>
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+    
+{% endblock %}
