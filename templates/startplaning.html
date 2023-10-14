@@ -5,7 +5,7 @@
 {% endblock %}
 {% block content %}
     <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
-    <h1> welcome {{ name }}</h1>
+    <h1 id="welcomeid"> {{ id }} </h1>
     <h1> Start Planning </h1>
     <h3>Begin managing your finances effectively - start budgeting today!</h3>
 
@@ -45,5 +45,10 @@
             </form>
         </div>
     </div>
+    <div id="expensesContainer">
+
+    </div>
+    <script src="{{url_for('static', filename='startplaning.js')}}"></script>
+ 
 
 {% endblock %}
