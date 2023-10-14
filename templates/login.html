@@ -18,7 +18,7 @@
 
     <button type="submit" name="login_button">LOGIN</button>
     </form>
-    <a href="{{ url_for('creataccount') }}"><button name="create_button">Create new account</button></a>
+    <a href="{{ url_for('createaccount') }}"><button name="create_button">Create new account</button></a>
     {% if error %}
         <p>{{ error }}</p>
     {% endif %}
