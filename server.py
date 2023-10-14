@@ -1,5 +1,5 @@
 from connection import sessions, database
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 import json
 from model import user, income, expense
 import os
@@ -13,6 +13,12 @@ app.config['SESSION_TYPE'] = 'filesystem'
 def home():
     return render_template("home.html")
 
+@app.route('/get_json')
+def get_json():
+    with open('expense_data.json', 'r') as json_file:
+        data = json_file.read()
+
+    return jsonify(data)
 
 @app.route("/createaccount", methods=["GET", "POST"])
 def createaccount():
@@ -150,7 +156,7 @@ def startplaning():
         with open('expense_data.json', 'w') as json_file:
             json.dump(existing_data, json_file)
 
-    return render_template("startplaning.html", name=name)
+    return render_template("startplaning.html", id=user_id)
     
 if __name__ == "__main__":
     app.run(debug=True)
