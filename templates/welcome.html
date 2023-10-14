@@ -4,8 +4,10 @@
 {% endblock %}
 
 {% block content %}
-    <h1> welcome {{ name }} {{ id }}</h1>
+
+    <h1 id="welcomeMessage">Welcome {{ name }} {{ id }}</h1>
     <a href="{{ url_for('startplaning') }}"><button>plan</button></a>
     <a href="{{ url_for('logout') }}"><button>logout</button></a>
+    
 
 {% endblock %}
