@@ -13,12 +13,28 @@ app.config['SESSION_TYPE'] = 'filesystem'
 def home():
     return render_template("home.html")
 
-@app.route('/get_json')
+@app.route('/get_userjson')
+def get_userjson():
+    with open('user_data.json', 'r') as userjson_file:
+        user_data = json.load(userjson_file)
+    
+    return jsonify(user_data)
+
+@app.route('/get_incomejson')
+def get_incomejson():
+    with open('income_data.json', 'r') as incomejson_file:
+        income_data = json.load(incomejson_file)
+    
+    return jsonify(income_data)
+
+@app.route('/get_expensejson')
 def get_json():
     with open('expense_data.json', 'r') as json_file:
-        data = json_file.read()
+        expense_data = json.load(json_file)
 
-    return jsonify(data)
+    return jsonify(expense_data)
+
+
 
 @app.route("/createaccount", methods=["GET", "POST"])
 def createaccount():
@@ -48,10 +64,10 @@ def createaccount():
             with open('user_data.json', 'r') as json_file:
                 existing_data = json.load(json_file)
         else:
-            existing_data = []
+            existing_data = {"users": []}
 
         # Append new user data to the existing data
-        existing_data.append(user_data)
+        existing_data["users"].append(user_data)
 
         # Save the updated data to the JSON file
         with open('user_data.json', 'w') as json_file:
@@ -117,10 +133,10 @@ def startplaning():
             with open('income_data.json', 'r') as json_file:
                 existing_data = json.load(json_file)
         else:
-            existing_data = []
+            existing_data = {"income": []}
 
         # Append new income data to the existing data
-        existing_data.append(incomes_data)
+        existing_data["income"].append(incomes_data)
 
         # Save the updated data to the JSON file
         with open('income_data.json', 'w') as json_file:
@@ -147,10 +163,10 @@ def startplaning():
             with open('expense_data.json', 'r') as json_file:
                 existing_data = json.load(json_file)
         else:
-            existing_data = []
+            existing_data = {"expense": []}
 
         # Append new expense data to the existing data
-        existing_data.append(expenses_data)
+        existing_data["expense"].append(expenses_data)
 
         # Save the updated data to the JSON file
         with open('expense_data.json', 'w') as json_file:
