@@ -1,5 +1,6 @@
 from connection import sessions, database
-from flask import Flask, render_template, request, redirect, url_for, session, jsonify
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify, flash
+from flask_login import LoginManager, login_required, login_user, logout_user, UserMixin
 import json
 from model import user, income, expense
 import os
@@ -8,6 +9,22 @@ from sqlalchemy import select
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'
 app.config['SESSION_TYPE'] = 'filesystem'
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+class MyUserMixin(UserMixin):
+    def get_id(self):
+        return str(self.id)
+
+    def is_authenticated(self):
+        return True
+
+    def is_active(self):
+        return True
+
+@login_manager.user_loader
+def loader_user(user_id):
+    return sessions.query(user).get(user_id)
 
 @app.route("/")
 def home():
@@ -38,13 +55,18 @@ def get_json():
 
 @app.route("/createaccount", methods=["GET", "POST"])
 def createaccount():
-    
+
     if request.method == 'POST':
 
         fname = request.form['fname']
         lname = request.form['lname']
         email = request.form['email']
         password = request.form['psw']
+
+        User = sessions.query(user).filter(user.email == email).first()
+        if User:
+            flash('Email address already exists')
+            return redirect(url_for('login'))
         users = user(fname, lname, email, password)
 
         sessions.add(users)
@@ -89,6 +111,7 @@ def login():
             if User and User.password == Password:
                 session['user_id'] = User.id
                 session['fname'] = User.fname
+                login_user(User)
                 return redirect(url_for('welcome'))
             else:
                 return render_template('login.html', error="Invalis email or password please enter agin ")
@@ -97,15 +120,18 @@ def login():
 
 @app.route("/logout")
 def logout():
-    #logout_user()
+    logout_user()
     return redirect(url_for("home"))
 
 @app.route("/welcome.html")
+@login_required
 def welcome():
     userid = session.get('user_id')
     name = session.get('fname')
     return render_template("welcome.html", name=name, id=userid)
+
 @app.route("/startplaning.html", methods=["GET", "POST"])
+@login_required
 def startplaning():
 
     user_id = session.get('user_id')
