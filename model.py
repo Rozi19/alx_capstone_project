@@ -4,7 +4,7 @@ It sets up User, Income, Expense, and Spending tables with their respective colu
 It provides a foundation for database creation and interaction using SQLAlchemy's ORM.
 """
 
-
+from flask_login import UserMixin
 from sqlalchemy import Column, Integer, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import ForeignKey
@@ -12,7 +12,7 @@ from sqlalchemy import ForeignKey
 Base = declarative_base()
 
 # User table representing users
-class user(Base):
+class user(Base, UserMixin):
     __tablename__ = 'user'
 
     id = Column(Integer, autoincrement=True, nullable=False, primary_key=True)
