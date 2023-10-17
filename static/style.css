@@ -1,21 +1,25 @@
-body{
+body {
+    background-color: #96deae;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     flex-wrap: wrap;
+
     padding: 20px;
-    gap: 40px;
+    gap: 20px;
+    
+
 }
 
-header {
+header, footer {
     display: flex;
     flex-direction: row;
     gap: 1000px;
     align-items: center;
     padding: 10px;
-    background-color: aqua;
+    background-color:  #50c878;
+    height: 100px; 
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 25px;
 
 }
 .welcome {
@@ -30,13 +34,32 @@ header {
     flex-wrap: wrap;
     gap: 10px;
 }
+
+.link {
+    display: inline-block;
+    text-decoration: none;
+    border: 1px solid black;
+    padding: 5px 10px;
+    background-color: #f2f2f2;
+    color: #333;
+  }
+  
 main {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
     padding: 23px;
-    gap: 30px;
+    gap: 20px;
     
+}
+
+.cate_pay, .use_graph, .spend_high {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
 }
 
 .category {
@@ -44,49 +67,103 @@ main {
     flex-direction: column;
     align-items: center;
     gap: 1px;
-    background-color: bisque;
+    background-color: #50c878;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding: 20px;
     height: 450px;
     width: 350px;
+    border-radius: 25px;
 }
 
 .use {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 75px;
-    background-color: bisque;
+    flex-direction: column;
+    align-items: center;
+    background-color: #50c878;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    padding: 10px;
+    padding: 5px;
     height: 230px;
     width: 550px;
+    border-radius: 25px;
 }
+
 .usage {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 .spending {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1px;
-    background-color: bisque;
+    background-color: #50c878;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding: 20px;
     height: 350px;
     width: 350px;
+    border-radius: 25px;
 }
 .spending_form {
     display: flex;
     flex-direction: column;
     align-items: left;
-    padding-top: 20px;
+    padding-top: 35px;
     gap: 10px;
-    color:darkgreen;
     font-size: 20px;
     font-weight: bold;
 }
+
+.input_text{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+}
+.payment {
+    display: flex;
+    justify-content: center;
+    background-color: #50c878;
+    height: 350px;
+    width: 380px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 25px;
+
+}
+
+.graph {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #50c878;
+    height: 630px;
+    width: 580px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 25px;
+    gap:10px;
+}
+.total_budget {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    font-weight: bolder;
+    font-size: 32px;
+}
+
+.highest {
+    display: flex;
+    justify-content: center;
+    background-color: #50c878;
+    height: 450px;
+    width: 380px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 25px;
+}
+
 
 .creat_account{
     display: flex;
