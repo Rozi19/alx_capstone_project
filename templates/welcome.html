@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block content %}
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
     <header>
         <div class="welcome">
@@ -12,53 +12,66 @@
             <h2 id="welcomeid"> {{ id }} </h2>
         </div>
         <div class="links">
-            <a href="{{ url_for('startplaning') }}">Start planing</a>
-            <a href="#">view transaction</a>
-            <a href="{{ url_for('logout') }}">logout</a>
+            <a href="{{ url_for('startplaning') }}" class="link">Start planing</a>
+            <a href="#" class="link">view transaction</a>
+            <a href="{{ url_for('logout') }}" class="link">logout</a>
         </div>
     </header>
     <main>
-        <div class="category" id="category">
-            <h1>Expense Category</h1>
-            <h2>let see the space between et</h2>
-            <h2>let see</h2>
-        </div>
-        <div class="use" id="use">
-            <div class="usage" id="total_budget">
-                <h2>Total Budgeted Expenses</h2>
+        <div class="cate_pay">
+            <div class="category">
+                <h1>Expense Category</h1>
+                <h2>let see the space between et</h2>
+                <h2>let see</h2>
             </div>
-            <div class="usage" id="remaining_budget">
-                <h2>Remaining Budgeted Expenses</h2>
+            <div class="payment">
+                <h1>Alert payment </h1>
             </div>
         </div>
-        <div class="spending" id="spending">
-            <h1>how much do you spend</h1>
-            <form class="spending_form">
-                <div class="input_text">
-                <lable for="category">Category</lable>
-                <input type="text" placeholder="Enter category">
+        <div class="use_graph">
+            <div class="use" id="use">
+                <div class="usage" id="total_budget">
+                    <h2>Total Budgeted Expenses</h2>
                 </div>
-                <div class="input_text">
-                <lable for="amount">Amount</lable>
-                <input type="number" placeholder="How much do you spend">
+                <div class="usage" id="remaining_budget">
+                    <h2>Remaining Budgeted Expenses</h2>
                 </div>
-                <div class="input_text">
-                <lable for="date">Date</lable>
-                <input type="date">
+            </div>
+            <div class="graph" id="graph">
+                <h1>Budget Tracker</h1>
+                <canvas id="budget_chart" class="myChart" style="width: 400px; height: 400px;"></canvas>
+                <div id="budget" class="total_budget"> 
+                    <p>Total Expense</p>
                 </div>
-                <div class="input_text">
-                <button type="submit">Add spending</button>
-                </div>
-            </form>
+               
+                
+                
+            </div>
         </div>
-        <div class="payment">
-            <h1>Alert payment </h1>
-        </div>
-        <div class="graph">
-            <h1>Graph</h1>
-        </div>
-        <div class="highest">
-            <h1>Highest spending</h1>
+        <div class="spend_high">
+            <div class="spending">
+                <h1>how much do you spend</h1>
+                <form class="spending_form" href="#" method="POST">
+                    <div class="input_text">
+                    <lable for="category">Category</lable>
+                    <select id="dropdown" name="spend_category"></select>
+                    </div>
+                    <div class="input_text">
+                    <lable for="amount">Amount</lable>
+                    <input type="number" placeholder="How much do you spend" name="spend_amount">
+                    </div>
+                    <div class="input_text">
+                    <lable for="date">Date</lable>
+                    <input type="date" name="spend_date">
+                    </div>
+                    <div class="input_text">
+                    <button type="submit" name="addspend">Add spending</button>
+                    </div>
+                </form>
+            </div>
+            <div class="highest">
+                <h1>Highest spending</h1>
+            </div>
         </div>
     </main>
     <footer>
