@@ -2,7 +2,7 @@ from connection import sessions, database
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify, flash
 from flask_login import LoginManager, login_required, login_user, logout_user, UserMixin
 import json
-from model import user, income, expense
+from model import user, income, expense, spending
 import os
 from sqlalchemy import select
 
@@ -50,6 +50,13 @@ def get_json():
         expense_data = json.load(json_file)
 
     return jsonify(expense_data)
+
+@app.route('/get_spendjson')
+def get_spendjson():
+    with open('spend_data.json', 'r') as json_file:
+        spend_data = json.load(json_file)
+
+    return jsonify(spend_data)
 
 
 
@@ -123,11 +130,47 @@ def logout():
     logout_user()
     return redirect(url_for("home"))
 
-@app.route("/welcome.html")
+@app.route("/welcome.html", methods=["GET", "POST"])
 @login_required
 def welcome():
     userid = session.get('user_id')
     name = session.get('fname')
+    if "addspend" in request.form:
+        if request.method == ["POST"]:
+
+            spend_category = request.form['spend_category']
+            spend_amount = request.form['spend_amount']
+            spend_date = request.form['spend_amount']
+
+            spend = spending(userid, spend_category, spend_amount, spend_date)
+            sessions.add(spend)
+            sessions.commit()
+
+            spend_data = {
+            'id': spend.id,
+            'user_id': spend.userid,
+            'category': spend.category,
+            'amount': spend.amount,
+            'date': spend.date
+            }
+
+        # Check if the JSON file exists
+        if os.path.exists('spend_data.json'):
+            # Load existing spend data from the JSON file
+            with open('spend_data.json', 'r') as json_file:
+                existing_data = json.load(json_file)
+        else:
+            existing_data = {"spending": []}
+
+        # Append new spend data to the existing data
+        existing_data["spending"].append(spend_data)
+
+        # Save the updated data to the JSON file
+        with open('spend_data.json', 'w') as json_file:
+            json.dump(existing_data, json_file)
+
+        
+
     return render_template("welcome.html", name=name, id=userid)
 
 @app.route("/startplaning.html", methods=["GET", "POST"])
