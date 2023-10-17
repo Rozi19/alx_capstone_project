@@ -63,7 +63,12 @@ class spending(Base):
 
     id = Column(Integer, autoincrement=True, nullable=False, primary_key=True)
     userid = Column(Integer, ForeignKey(user.id), nullable=False)
-    expense_id = Column(Integer, ForeignKey(expense.id))
     category = Column(String(200), nullable=False)
     amount = Column(Integer, nullable=False)
     date = Column(DateTime, nullable=False)
+
+    def __init__(self, userid, category, amount, date):
+        self.userid = userid
+        self.category = category
+        self.amount = amount
+        self.date = date
