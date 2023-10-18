@@ -22,6 +22,7 @@ header, footer {
     border-radius: 25px;
 
 }
+
 .welcome {
     display: flex;
     padding: 5px;
@@ -62,6 +63,7 @@ main {
     align-items: center;
 }
 
+
 .category {
     display: flex;
     flex-direction: column;
@@ -73,7 +75,8 @@ main {
     height: 450px;
     width: 350px;
     border-radius: 25px;
-}
+    overflow-y: auto; /* Add scrollbar to vertical overflow */
+  }
 
 .use {
     display: flex;
@@ -156,7 +159,8 @@ main {
 
 .highest {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     background-color: #50c878;
     height: 450px;
     width: 380px;
