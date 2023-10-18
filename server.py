@@ -1,4 +1,5 @@
 from connection import sessions, database
+from datetime import datetime
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify, flash
 from flask_login import LoginManager, login_required, login_user, logout_user, UserMixin
 import json
@@ -136,41 +137,42 @@ def welcome():
     userid = session.get('user_id')
     name = session.get('fname')
     if "addspend" in request.form:
-        if request.method == ["POST"]:
-
+        if request.method == "POST":
             spend_category = request.form['spend_category']
             spend_amount = request.form['spend_amount']
-            spend_date = request.form['spend_amount']
+            spend_date = request.form['spend_date']
 
             spend = spending(userid, spend_category, spend_amount, spend_date)
             sessions.add(spend)
             sessions.commit()
+            spend_date = datetime.strptime(spend_date, '%Y-%m-%d')  # Parse the date string
+
+            spend_date_str = spend_date.isoformat()  # Convert to string representation
+
 
             spend_data = {
-            'id': spend.id,
-            'user_id': spend.userid,
-            'category': spend.category,
-            'amount': spend.amount,
-            'date': spend.date
+                'id': spend.id,
+                'user_id': spend.userid,
+                'category': spend.category,
+                'amount': spend.amount,
+                'date': spend_date_str
             }
 
-        # Check if the JSON file exists
-        if os.path.exists('spend_data.json'):
-            # Load existing spend data from the JSON file
-            with open('spend_data.json', 'r') as json_file:
-                existing_data = json.load(json_file)
-        else:
-            existing_data = {"spending": []}
+            # Check if the JSON file exists
+            if os.path.exists('spend_data.json'):
+                # Load existing spend data from the JSON file
+                with open('spend_data.json', 'r') as json_file:
+                    existing_data = json.load(json_file)
+            else:
+                existing_data = {"spending": []}
 
-        # Append new spend data to the existing data
-        existing_data["spending"].append(spend_data)
+            # Append new spend data to the existing data
+            existing_data["spending"].append(spend_data)
 
-        # Save the updated data to the JSON file
-        with open('spend_data.json', 'w') as json_file:
-            json.dump(existing_data, json_file)
-
-        
-
+            # Save the updated data to the JSON file
+            with open('spend_data.json', 'w') as json_file:
+                json.dump(existing_data, json_file)   
+    
     return render_template("welcome.html", name=name, id=userid)
 
 @app.route("/startplaning.html", methods=["GET", "POST"])
