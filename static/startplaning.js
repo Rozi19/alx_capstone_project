@@ -18,7 +18,7 @@ fetch('/get_incomejson')
     
       li.textContent = `${income.category} = ${income.amount}`;
       income_sum += income.amount;
-    
+
       const editButton = document.createElement('button');
       editButton.textContent = 'Edit';
       editButton.setAttribute('class', 'edit');
@@ -34,8 +34,8 @@ fetch('/get_incomejson')
           const updatedAmount = parseFloat(newAmount);
           amountText.textContent = `${income.category} = ${updatedAmount}`;
           income_sum = income_sum - currentAmount + updatedAmount;
+          console.log(updatedAmount);
           incomepar.innerHTML = 'Total income: ' + income_sum;
-    
           // Send a request to the server to update the income data
           fetch('/update_income', {
             method: 'POST',
@@ -114,30 +114,99 @@ fetch('/get_incomejson')
   });
 fetch('/get_expensejson')
   .then(response => response.json())
-    .then(expense_data => {
-        const filteredExpenses = expense_data.expense.filter(expense => expense.user_id === wel_id);
+  .then(expense_data => {
+    const filteredExpenses = expense_data.expense.filter(expense => expense.user_id === wel_id);
 
-        filteredExpenses.sort((a, b) => b.amount - a.amount);
+    filteredExpenses.sort((a, b) => b.amount - a.amount);
+    filteredExpenses.forEach(expense => {
+      const expenseContainer = document.createElement('div');
+      expenseContainer.setAttribute('class', 'expense_container');
+      const li = document.createElement('li');
+      li.textContent = `${expense.category} = ${expense.amount}`;
+      expense_sum += expense.amount;
 
-        filteredExpenses.forEach(expense => {
-          const li = document.createElement('li');
-          li.textContent = `${expense.category} = ${expense.amount}`;
-          expense_sum += expense.amount;
-          ul.appendChild(li);
-          
-        });
+      const editButton = document.createElement('button');
+      editButton.textContent = 'Edit';
+      editButton.setAttribute('class', 'edit');
+      editButton.setAttribute('name', 'edit');
 
-        const paragraph = document.createElement('p');
-        paragraph.innerHTML = "Total sum of your planned Expense: " + expense_sum;
-        document.body.appendChild(paragraph);
-        console.log('Expense sum:', expense_sum);
+      editButton.addEventListener('click', function () {
+        const expenseItem = this.parentNode;
+        const amountText = expenseItem.querySelector('li');
+        const currentAmount = parseFloat(amountText.textContent.split('=')[1].trim());
+        const newAmount = prompt('Enter the new amount:', currentAmount);
 
-        const difference = income_sum - expense_sum;
-        const differencepara = document.createElement('p');
-        differencepara.innerHTML = "Available balance " + difference;
-        document.body.appendChild(differencepara);
+        if (newAmount !== null && !isNaN(newAmount)) {
+          const updatedAmount = parseFloat(newAmount);
+          amountText.textContent = `${expense.category} = ${updatedAmount}`;
+          expense_sum = expense_sum - currentAmount + updatedAmount;
+          expensepar.innerHTML = 'Total expense: ' + expense_sum;
+
+          // Send a request to the server to update the expense data
+          fetch('/update_expense', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ user_id: wel_id, category: expense.category, amount: updatedAmount })
+          })
+            .then(response => response.json())
+            .then(result => {
+              // Handle the response from the server if needed
+              console.log(result);
+            })
+            .catch(error => {
+              // Handle any errors that occurred during the request
+              console.error('Error:', error);
+            });
+        }
+      });
+
+      const deleteButton = document.createElement('button');
+      deleteButton.textContent = 'Delete';
+      deleteButton.setAttribute('class', 'delete');
+      deleteButton.setAttribute('type', 'submit');
+
+      deleteButton.addEventListener('click', function (event) {
+        event.preventDefault();
+        const expenseContainer = this.parentNode;
+        const dataToDelete = expenseContainer.querySelector('li').textContent;
+        const amountToDelete = parseFloat(dataToDelete.split('=')[1].trim());
+
+        fetch('/delete_expense', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ data: dataToDelete, user_id: wel_id })
+        })
+          .then(response => response.json())
+          .then(result => {
+            console.log(result);
+            expenseContainer.remove();
+
+            expense_sum -= amountToDelete;
+            expensepar.innerHTML = 'Total expense: ' + expense_sum;
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+      });
+
+      expenseContainer.appendChild(li);
+      expenseContainer.appendChild(editButton);
+      expenseContainer.appendChild(deleteButton);
+      ul.appendChild(expenseContainer);
+    });
+    const expensepar = document.createElement('p');
+    expensepar.innerHTML = 'Total sum of your planned Expense: ' + expense_sum;
+    document.body.appendChild(expensepar);
+
+    const difference = income_sum - expense_sum;
+    const differencepara = document.createElement('p');
+    differencepara.innerHTML = 'Available balance: ' + difference;
+    document.body.appendChild(differencepara);
   })
   .catch(error => {
-  console.error('Error:', error);
+    console.error('Error:', error);
   });
- 
