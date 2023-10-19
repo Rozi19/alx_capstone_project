@@ -1,8 +1,67 @@
 {% extends 'base.html' %}
-{% block title%}
+
+{% block title %}
     Home Page
 {% endblock %}
+
 {% block content %}
-    <h1>Budget Tracker</h1>
-    <a href="{{ url_for('login') }}"><button>LOGIN</button></a>
+    <!-- Include the 'homestyle.css' stylesheet for styling -->
+    <link rel="stylesheet" href="{{url_for('static', filename='homestyle.css')}}">
+
+    <!-- Header section -->
+    <header>
+        <h1>Budget Tracker</h1>
+    </header>
+
+    <!-- Main content section -->
+    <main>
+        <!-- Hero section -->
+        <div class="hero">
+            <div class="container">
+                <h2>Take control of your finances</h2>
+                <p>Plan Your Expenses, Track Real-Time Spending, Achieve Financial Goals, and Gain Insights with our comprehensive financial management solution.</p>
+                <a href="{{ url_for('login') }}" class="login-button">Get Started</a>
+            </div>
+        </div>
+
+        <!-- Features section -->
+        <div class="features">
+            <div class="container">
+                <h2>Key Features</h2>
+                <!-- Feature 1 -->
+                <div class="feature">
+                    <h3>Plan Your Expenses</h3>
+                    <p>Easily allocate your income and set spending targets for different categories.</p>
+                </div>
+                <!-- Feature 2 -->
+                <div class="feature">
+                    <h3>Track Real-Time Spending</h3>
+                    <p>Stay on top of your expenses by recording them as they happen.</p>
+                </div>
+                <!-- Feature 3 -->
+                <div class="feature">
+                    <h3>Achieve Financial Goals</h3>
+                    <p>Define your goals and track your progress towards achieving them.</p>
+                </div>
+                <!-- Feature 4 -->
+                <div class="feature">
+                    <h3>Gain Insights</h3>
+                    <p>Get valuable reports and charts to understand your financial health.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer section -->
+    <footer>
+        <!-- Copyright notice -->
+        <p>&copy; 2023 Budget Tracker. All rights reserved.</p>
+        <!-- Social media links -->
+        <div class="social-media">
+            <a href="https://github.com/Rozi19"><img src="github-icon.png" alt="github" class="social-icon"></a>
+            <a href="https://www.linkedin.com/in/roza-alene-b3605b279?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BPMRWaTanSbW6B7aQs6NkwA%3D%3D"><img src="image/linkedin-icon.png" alt="LinkedIn" class="social-icon"></a>
+            <a href="https://x.com/rozaalene"><img src="image/twitter-icon.png" alt="Twitter" class="social-icon"></a>
+            <a href="https://t.me/Rozi29"><img src="image/telegram-icon.png" alt="Telegram" class="social-icon"></a>
+        </div>
+    </footer>
 {% endblock %}
