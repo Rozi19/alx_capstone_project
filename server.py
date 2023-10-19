@@ -244,7 +244,57 @@ def startplaning():
             json.dump(existing_data, json_file)
 
     return render_template("startplaning.html", id=user_id)
-    
+
+@app.route('/delete_income', methods=['POST'])
+def delete_income():
+    # Extract data to delete from the request
+    data_to_delete = request.json.get('data')
+    user_id = request.json.get('user_id')
+    category_name = data_to_delete.split('=')[0].strip()
+    # Delete the item from the database
+    result = sessions.query(income).filter_by(category=category_name, userid=user_id).delete()
+    sessions.commit()
+
+    if result:
+        # Update the JSON file
+        if os.path.exists('income_data.json'):
+            with open('income_data.json', 'r') as json_file:
+                existing_data = json.load(json_file)
+                existing_data["income"] = [item for item in existing_data["income"] if
+                                           item["category"] != category_name or item["user_id"] != user_id]
+            with open('income_data.json', 'w') as json_file:
+                json.dump(existing_data, json_file)
+
+        return jsonify({'message': 'Item deleted successfully'})
+    else:
+        return jsonify({'error': 'Item not found'})
+
+@app.route('/delete_expense', methods=['POST'])
+def delete_expense():
+    # Extract data to delete from the request
+    data_to_delete = request.json.get('data')
+    user_id = request.json.get('user_id')
+    category_name = data_to_delete.split('=')[0].strip()
+    # Delete the item from the database
+    result = sessions.query(expense).filter_by(category=category_name, userid=user_id).delete()
+    sessions.commit()
+
+    if result:
+        # Update the JSON file
+        if os.path.exists('expense_data.json'):
+            with open('expense_data.json', 'r') as json_file:
+                existing_data = json.load(json_file)
+                existing_data["expense"] = [item for item in existing_data["expense"] if
+                                           item["category"] != category_name or item["user_id"] != user_id]
+            with open('income_data.json', 'w') as json_file:
+                json.dump(existing_data, json_file)
+
+        return jsonify({'message': 'Item deleted successfully'})
+    else:
+        return jsonify({'error': 'Item not found'})
+
+
+
 if __name__ == "__main__":
     app.run(debug=True)
 
