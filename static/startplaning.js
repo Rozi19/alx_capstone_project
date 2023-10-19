@@ -15,16 +15,46 @@ fetch('/get_incomejson')
       const incomeContainer = document.createElement('div');
       incomeContainer.setAttribute('class', 'income_container');
       const li = document.createElement('li');
-
+    
       li.textContent = `${income.category} = ${income.amount}`;
       income_sum += income.amount;
-      
-      const editbutton = document.createElement("button");
-      editbutton.textContent = "Edit";
-      editbutton.setAttribute('class', 'update');
-      editbutton.setAttribute('name', 'update');
-
-      
+    
+      const editButton = document.createElement('button');
+      editButton.textContent = 'Edit';
+      editButton.setAttribute('class', 'edit');
+      editButton.setAttribute('name', 'edit');
+    
+      editButton.addEventListener('click', function() {
+        const incomeItem = this.parentNode;
+        const amountText = incomeItem.querySelector('li');
+        const currentAmount = parseFloat(amountText.textContent.split('=')[1].trim());
+        const newAmount = prompt('Enter the new amount:', currentAmount);
+    
+        if (newAmount !== null && !isNaN(newAmount)) {
+          const updatedAmount = parseFloat(newAmount);
+          amountText.textContent = `${income.category} = ${updatedAmount}`;
+          income_sum = income_sum - currentAmount + updatedAmount;
+          incomepar.innerHTML = 'Total income: ' + income_sum;
+    
+          // Send a request to the server to update the income data
+          fetch('/update_income', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ user_id: wel_id, category: income.category, amount: updatedAmount })
+          })
+            .then(response => response.json())
+            .then(result => {
+              // Handle the response from the server if needed
+              console.log(result);
+            })
+            .catch(error => {
+              // Handle any errors that occurred during the request
+              console.error('Error:', error);
+            });
+        }
+      });
 
       const deleteButton = document.createElement('button');
       deleteButton.textContent = 'Delete';
@@ -69,7 +99,7 @@ fetch('/get_incomejson')
       });
 
       incomeContainer.appendChild(li);
-      incomeContainer.appendChild(editbutton);
+      incomeContainer.appendChild(editButton);
       incomeContainer.appendChild(form);
       ulincome.appendChild(incomeContainer);
     });
@@ -78,9 +108,13 @@ fetch('/get_incomejson')
     incomepar.innerHTML = "Total income: " + income_sum;
     document.body.appendChild(incomepar);
 
-    fetch('/get_expensejson')
-      .then(response => response.json())
-      .then(expense_data => {
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+fetch('/get_expensejson')
+  .then(response => response.json())
+    .then(expense_data => {
         const filteredExpenses = expense_data.expense.filter(expense => expense.user_id === wel_id);
 
         filteredExpenses.sort((a, b) => b.amount - a.amount);
@@ -89,8 +123,8 @@ fetch('/get_incomejson')
           const li = document.createElement('li');
           li.textContent = `${expense.category} = ${expense.amount}`;
           expense_sum += expense.amount;
-          
           ul.appendChild(li);
+          
         });
 
         const paragraph = document.createElement('p');
@@ -102,11 +136,8 @@ fetch('/get_incomejson')
         const differencepara = document.createElement('p');
         differencepara.innerHTML = "Available balance " + difference;
         document.body.appendChild(differencepara);
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
   })
   .catch(error => {
-    console.error('Error:', error);
+  console.error('Error:', error);
   });
+ 
