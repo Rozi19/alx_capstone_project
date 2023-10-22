@@ -4,38 +4,62 @@
 {% endblock %}
 
 {% block content %}
-    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
-    <div class="creat_account">
-        <h1> Create New Account</h1><br>
-        <form action = "#" method="POST">
-            <div>
-                <label for="fisrtname">First Name</label>
-                <input type="text" id="fname" name="fname" placeholder="Enter your first name" required><br>
-                <div id="fnameError" class="error"></div><br><br>
-            </div>
-            <div>
-                <lable for="lastname">Last Name</lable>
-                <input type="text" id="lname" name="lname" placeholder="Enter your last name" required><br>
-                <div id="lnameError" class="error"></div><br><br>
-            </div>
-            <div>
-                <lable for="email">Email</lable>
-                <input type="email" id="email" name="email" placeholder="example@gmail.com" ><br>
-                <div id="emailError" class="error"></div><br><br>
-            </div>
-            <div>
-                <lable for="password">Password</lable>
-                <input type="password" id="psw" name="psw" placeholder="Enter strong password" ><br>
-                <div id="passwordError" class="error"></div><br><br>
-            </div>
-            <div>
-                <lable for="confirmpassword">confirm password</lable> 
-                <input type="password" id="cpsw" name="cpsw" placeholder="Enter your password again" ><br>
-                <div id="confirmPasswordError" class="error"></div><br><br>
-            </div>
-            <button type="submit">Create Account</button>
-            <p id="error" style="color: red;"></p>
-        </form>
-        <script src="{{url_for('static', filename='script.js')}}"></script>
-    </div>
+
+    <!-- Include the 'formstyle.css' stylesheet for styling -->
+    <link rel="stylesheet" href="{{url_for('static', filename='formstyle.css')}}">
+
+    <!-- Main content section -->
+    <main>
+
+        <!-- create account container -->
+        <div class="creat_account">
+            <h1> Create New Account</h1><br>
+
+            <!-- Form container -->
+            <form action = "#" method="POST">
+
+                <!-- First name container -->
+                <div>
+                    <lable for="firstname">First Name</lable>
+                    <input type="text" id="fname" name="fname" placeholder="Enter your first name" required><br>
+                    <div id="fnameError" class="error"></div><br><br>
+                </div>
+
+                <!-- Last name container -->
+                <div>
+                    <lable for="lastname">Last Name</lable>
+                    <input type="text" id="lname" name="lname" placeholder="Enter your last name" required><br>
+                    <div id="lnameError" class="error"></div><br><br>
+                </div>
+
+                <!-- Email container -->
+                <div>
+                    <lable for="email">Email</lable>
+                    <input type="email" id="email" name="email" placeholder="example@gmail.com" ><br>
+                    <div id="emailError" class="error"></div><br><br>
+                </div>
+
+                <!-- Password container -->
+                <div>
+                    <lable for="password">Password</lable>
+                    <input type="password" id="psw" name="psw" placeholder="Enter strong password" ><br>
+                    <div id="passwordError" class="error"></div><br><br>
+                </div>
+
+                <!-- Confirm Password container -->
+                <div>
+                    <lable for="confirmpassword">confirm password</lable> 
+                    <input type="password" id="cpsw" name="cpsw" placeholder="Enter your password again" ><br>
+                    <div id="confirmPasswordError" class="error"></div><br><br>
+                </div>
+
+                <!-- Button -->
+                <button type="submit">Create Account</button>
+                <p id="error" style="color: red;"></p>
+            </form>
+
+            <!-- Include the 'script.js' javascript for interaction -->
+            <script src="{{url_for('static', filename='script.js')}}"></script>
+        </div>
+    </main>
 {% endblock %}

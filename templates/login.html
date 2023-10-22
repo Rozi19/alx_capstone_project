@@ -4,23 +4,38 @@
 {% endblock %}
 
 {% block content %}
-   
-    <form action="#" method="POST">
-    <div>
-        <lable for="email">Email</lable>
-        <input type="email" id="email" name="email" placeholder="Enter your email" ><br><br>
-    </div>
+     <!-- Include the 'formstyle.css' stylesheet for styling -->
+    <link rel="stylesheet" href="{{url_for('static', filename='formstyle.css')}}">
 
-    <div>
-        <lable for="password">Password</lable>
-        <input type="password" id="psw" name="password" placeholder="Enter Your password" ><br>
-    </div>
+    <!-- Main content section -->
+    <main>
+        <h1>Login</h1>
 
-    <button type="submit" name="login_button">LOGIN</button>
-    </form>
-    <a href="{{ url_for('createaccount') }}"><button name="create_button">Create new account</button></a>
-    {% if error %}
-        <p>{{ error }}</p>
-    {% endif %}
-    
+        <!-- Form container -->
+        <form class="form" action="#" method="POST">
+
+        <!-- email container -->
+        <div class="email">
+            <lable for="email">Email</lable>
+            <input type="email" id="email" name="email" placeholder="Enter your email" ><br><br>
+        </div>
+
+        <!-- password container -->
+        <div class="password">
+            <lable for="password">Password</lable>
+            <input type="password" id="psw" name="password" placeholder="Enter Your password" ><br>
+        </div>
+
+        <!-- Button -->
+        <button type="submit" name="login_button" class="login_button">LOGIN</button>        
+        </form>
+
+        <!-- link -->
+        <a href="{{ url_for('createaccount') }}"><button name="create_button">Create new account</button></a>
+        {% if error %}
+            <p>{{ error }}</p>
+        {% endif %}
+
+    </main>
+        
 {% endblock %}

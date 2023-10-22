@@ -4,51 +4,84 @@
     Start Planning
 {% endblock %}
 {% block content %}
-    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
-    <h1 id="welcomeid"> {{ id }} </h1>
-    <h1> Start Planning </h1>
-    <h3>Begin managing your finances effectively - start budgeting today!</h3>
 
-    <div class="budget">
-        <div class="same">
-            <form action="#" method="POST">
-                <h1> Income</h1>
-                <label for="income_category">Income Category</label>
-                <input list="income_category_list" name="income_category" placeholder="Enter your category or choose">
-                <datalist id="income_category_list">
-                    <option value="Salary">
-                    <option value="Part time job">
-                </datalist>
-                <label for="amount">Amount</label>
-                <input type="number" name="amount" placeholder="Please enter yor net income"><br><br>
-                <button type="submit" name="income_button">Add income</button>
-            </form>
+    <!-- Include the 'planingstyle.css' stylesheet for styling -->
+    <link rel="stylesheet" href="{{url_for('static', filename='planingstyle.css')}}">
+
+    <!-- Header section -->
+    <header>
+
+        <!-- welcome container -->
+        <div class="welcome">
+            <h2 id="welcomeid" class="invisible"> {{ id }} </h2>
+            <h1>start planing {{ name }} </h2>
         </div>
-        <div class="same">
-            <form action="#" method="POST">
-                <h1>Expense</h1>
-                <label for="expense_category">Expense Category</label>
-                <input list="expense_category_list" name="expense_category" placeholder="Enter your category or choose">
-                <datalist id="expense_category_list">
-                    <option value="House">
-                    <option value="Grocery">
-                    <option value="Fuel or Transportation">
-                    <option value="Healthcare">
-                    <option value="Personal Spending">
-                    <option value="Saving">
-                    <option value="Entertainment">
-                </datalist>
-                <br><br>
-                <label for="amount">Amount</label>
-                <input type="number" name="amount_expense" placeholder="how much do you want to spend"><br><br>
-                <button type="submit" name="expense_button">Add Expense</button>
-            </form>
+
+         <!-- links container -->
+        <div class="links">
+            <a href="{{ url_for('welcome') }}" class="link">Track Spanding</a>
+            <a href="{{ url_for('viewreport') }}" class="link">view transaction</a>
+            <a href="{{ url_for('logout') }}" class="link">logout</a>
         </div>
-    </div>
-    <ul id="income"></ul>
-    <ul id="expense">
-    </ul>
-    <script src="{{url_for('static', filename='startplaning.js')}}"></script>
- 
+    </header>
+
+     <!-- Main section -->
+    <main>
+
+         <!-- bubget container -->
+        <div class="budget">
+
+             <!-- budget sub container -->
+            <div class="same">
+
+                 <!-- form container -->
+                <form action="#" method="POST">
+                    <h1> Income</h1>
+                    <label for="income_category">Income Category</label>
+                    <input list="income_category_list" name="income_category" placeholder="Enter your category or choose">
+                    <datalist id="income_category_list">
+                        <option value="Salary">
+                        <option value="Part time job">
+                    </datalist>
+                    <label for="amount">Amount</label>
+                    <input type="number" name="amount" placeholder="Please enter yor net income"><br><br>
+                    <button type="submit" name="income_button">Add income</button>
+                </form>
+            </div>
+
+            <!-- budget sub container -->
+            <div class="same">
+
+                <!-- form container -->
+                <form action="#" method="POST">
+                    <h1>Expense</h1>
+                    <label for="expense_category">Expense Category</label>
+                    <input list="expense_category_list" name="expense_category" placeholder="Enter your category or choose">
+                    <datalist id="expense_category_list">
+                        <option value="House">
+                        <option value="Grocery">
+                        <option value="Fuel or Transportation">
+                        <option value="Healthcare">
+                        <option value="Personal Spending">
+                        <option value="Saving">
+                        <option value="Entertainment">
+                    </datalist>
+                    <br><br>
+                    <label for="amount">Amount</label>
+                    <input type="number" name="amount_expense" placeholder="how much do you want to spend"><br><br>
+                    <button type="submit" name="expense_button">Add Expense</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- list container -->
+        <div class="lists"> 
+        <ul id="income"></ul>
+        <ul id="expense"></ul>
+        </div>
+
+        <!-- Include the 'startplaning.js' javascript for interaction -->
+        <script src="{{url_for('static', filename='startplaning.js')}}"></script>
+    </main>
 
 {% endblock %}
