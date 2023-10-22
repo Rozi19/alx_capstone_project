@@ -1,7 +1,10 @@
+// Getting the welcome message and extracting the user ID
 var welcomeMessage = document.getElementById("welcomeid").textContent;
 var wel_id = parseInt(welcomeMessage.split(" ")[1]);
+
+// Getting DOM elements
 const totalBudgetDiv = document.getElementById('total_budget');
-const totalspending = document.getElementById('remaining_budget')
+const totalspending = document.getElementById('remaining_budget');
 const budget_chart = document.getElementById("budget_chart");
 const graph_budget = document.getElementById('graph');
 const total = document.getElementById('budget');
@@ -10,12 +13,14 @@ const list_category = document.getElementById('dropdown');
 const topthree = document.getElementById('highest');
 const expanse_list = document.getElementById("expense")
 
+// Initializing variables
 let expense_sum = 0;
 let spend_sum = 0;
 let income_sum = 0;
 let category_array = [];
 let amount_array = [];
 
+// Function to generate a random color in RGB format
 function randomColor() {
   // Generate random RGB values
   const r = Math.floor(Math.random() * 256);
@@ -26,7 +31,7 @@ function randomColor() {
   return `rgb(${r}, ${g}, ${b})`;
 }
 
-
+// Function to populate the category dropdown list
 function category_list(data) {
   data.forEach(list => {
     const option = document.createElement('option');
@@ -36,6 +41,7 @@ function category_list(data) {
   });
 }
 
+// Fetching expense data from the server
 fetch('/get_expensejson')
   .then(response => response.json())
   .then(expense_data => {
@@ -47,14 +53,12 @@ fetch('/get_expensejson')
       expense_sum += expense.amount;
     });
 
-    const paragraph = document.createElement('p');
-    paragraph.innerHTML = expense_sum;
-    totalBudgetDiv.appendChild(paragraph);
-
+    // Displaying the total expense
     const paragraph1 = document.createElement('p');
     paragraph1.innerHTML = expense_sum;
     total.appendChild(paragraph1);
 
+    // Creating a doughnut chart to visualize expenses
     new Chart(budget_chart, {
       type: "doughnut",
       data: {
@@ -76,18 +80,20 @@ fetch('/get_expensejson')
       }
     });
 
+    // Creating dropdown options based on expense categories
     const dropdownData = category_array.map(category => ({
       value: category,
       text: category
     }));
     category_list(dropdownData);
 
+    // Fetching spending data from the server
     fetch('/get_spendjson')
       .then(response => response.json())
       .then(spend_data => {
         const filterspend = spend_data.spending.filter(spend => spend.user_id === wel_id);
 
-        // Create an object to store the similar spendings
+        // Create dictionary to store the similar spendings
         const similarspendings = {};
 
         filterspend.forEach(spend => {
@@ -95,7 +101,7 @@ fetch('/get_expensejson')
           const amount = spend.amount;
 
           if (similarspendings.hasOwnProperty(category)) {
-            // If the category already exists in the object, add the amount to the existing value
+            // If the category already exists in the dictionary, add the amount to the existing value
             similarspendings[category] += amount;
           } else {
             // If the category doesn't exist, create a new entry with the amount
@@ -107,10 +113,8 @@ fetch('/get_expensejson')
         const sortedSpendings = Object.entries(similarspendings)
           .sort((a, b) => b[1] - a[1]);
 
-        // Get the top three spendings
-        const topThreeSpendings = sortedSpendings.slice(0, 3);
-
-        topThreeSpendings.forEach(([category, amount]) => {
+        // Displaying the top three spendings
+        sortedSpendings.forEach(([category, amount]) => {
           spend_sum += amount;
           console.log(expense.amount)
           const spendItem = document.createElement('li');
@@ -118,6 +122,12 @@ fetch('/get_expensejson')
           topthree.appendChild(spendItem);
         });
 
+        // Displaying the total spending
+        const paragraph = document.createElement('p');
+        paragraph.innerHTML = spend_sum;
+        totalBudgetDiv.appendChild(paragraph);
+        
+        // Displaying the remaining budget
         const paragraph2 = document.createElement('p');
         paragraph2.innerHTML = expense_sum - spend_sum;
         totalspending.appendChild(paragraph2);
@@ -129,14 +139,17 @@ fetch('/get_expensejson')
     .catch(error => {
       console.error('Error:', error);
     });
+
+// Fetching income data from the server
 fetch('/get_incomejson')
   .then(response => response.json())
   .then(income_data => {
-    const filterincome = income_data.income.filter(income => income.user_id === wel_id);
+    const filterincome = income_data.income.filter(income => income.user_id=== wel_id);
     filterincome.forEach(income => {
       income_sum += income.amount;
     });
 
+    // Displaying the total income
     const incomepar = document.createElement('p');
     incomepar.innerHTML = income_sum;
     totalincome.appendChild(incomepar);
@@ -146,7 +159,8 @@ fetch('/get_incomejson')
   });
 
 
-  fetch('/get_expensejson')
+// Fetching expense data from the server
+fetch('/get_expensejson')
   .then(response => response.json())
   .then(expense_data => {
     const filteredExpenses = expense_data.expense.filter(expense => expense.user_id === wel_id);
@@ -158,7 +172,6 @@ fetch('/get_incomejson')
         const filteredSpending = spend_data.spending.filter(spend => spend.user_id === wel_id);
 
         // Iterate over expense data
-        // Iterate over expense data
         filteredExpenses.forEach(expense => {
           const category = expense.category;
           const expenseAmount = expense.amount;
@@ -169,6 +182,7 @@ fetch('/get_incomejson')
 
           const remainingAmount = expenseAmount - spendingAmount;
 
+          // Display expense, spending, and remaining amounts in the list item
           li.textContent = `${category} = ${expenseAmount} Spend: ${spendingAmount}, Remaining: ${remainingAmount}`;
           expanse_list.appendChild(li);
 
