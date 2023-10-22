@@ -5,7 +5,6 @@ html, body, h1, h2, h3, p, a {
   }
 
 /* Body Styles */
-
   body {
     display: flex;
     flex-direction: column;
@@ -13,8 +12,8 @@ html, body, h1, h2, h3, p, a {
     background-color: #f1f1f1;
     color: #333333;
   }
-/* Header Styles */
 
+/* Header Styles */
   header {
     background-color: #4a90e2;
     padding: 20px;
@@ -26,13 +25,14 @@ html, body, h1, h2, h3, p, a {
   }
   
   
-  
+/* main containers Styles */
   .container {
     max-width: 900px;
     margin: 0 auto;
     padding: 20px;
   }
   
+/* main sub container Styles */
   .hero {
     background-color: #ffffff;
     padding: 60px 0;
@@ -50,7 +50,8 @@ html, body, h1, h2, h3, p, a {
     margin-bottom: 40px;
     color: #666666;
   }
-  
+
+/* login button Styles */
   .login-button {
     display: inline-block;
     padding: 12px 24px;
@@ -65,7 +66,8 @@ html, body, h1, h2, h3, p, a {
   .login-button:hover {
     background-color: #366db7;
   }
-  
+
+/* main describtion container Styles */
   .features {
     padding: 40px 0;
     text-align: center;
@@ -106,6 +108,8 @@ html, body, h1, h2, h3, p, a {
     color: #ffffff;
     
   }
+
+  /* social media Styles */
   .social-media {
     display: flex;
     flex-direction: row;
@@ -115,7 +119,8 @@ html, body, h1, h2, h3, p, a {
     width: 30px;
     height: 30px;
   }
-  /* Mobile Styles */
+  
+  /* Mobile device Styles */
 @media screen and (max-width: 767px) {
   header {
     font-size: 28px;
@@ -169,7 +174,7 @@ html, body, h1, h2, h3, p, a {
   }
 }
 
-/* Tablet Styles */
+/* Tablet device Styles */
 @media screen and (min-width: 768px) and (max-width: 1023px) {
   header {
     font-size: 32px;
