@@ -1,0 +1,188 @@
+/* body Styles */
+body {
+    background-color: #f1f1f1;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* header Styles */
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding-bottom: 10px;
+    background-color:#4a90e2 ;
+    height: 150px; 
+    width: 100%;
+    color: white;
+    font-size: 20px;
+    font-weight: bolder;
+    border-radius: 15px;
+
+}
+
+/* header links Styles */
+.links {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.link {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #ffffff;
+    color: #4a90e2;
+    font-size: 18px;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+
+.link:hover {
+    background-color: #f1f1f1;
+  }
+
+/* main Styles */
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    gap: 10px;
+    
+}
+
+/* main budget container Styles */
+.budget {
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+}
+
+/* main budget sub containers Styles */
+.same {
+    display: flex;
+    background-color: #ffffff;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 15px;
+}
+
+/* label Styles */
+label {
+    font-size: 30px;
+    color: #4a90e2;
+    font-weight:lighter;
+}
+
+/* input type Styles */
+input[type=text], input[type=number], input[ name="income_category"], input[name="expense_category"] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 3px solid #ccc;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+}
+
+input[type=number]:focus, input[type=text]:focus, input[ name="income_category"]:focus, input[name="expense_category"]:focus {
+    border: 3px solid #4a90e2;
+}
+
+/* button Styles */
+button {
+    padding: 10px 20px;
+    background-color: #4a90e2;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+button:hover {
+    background-color: #366db7;
+}
+
+/* list Styles */
+.lists {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    
+}
+
+/* paragraph Styles */
+p {
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+/* main income expense container Styles */
+.income_container, .expense_container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+/* delete button Styles */
+.delete {
+    background-color: red;
+    color: white;
+}
+
+/* invisible Styles */
+.invisible {
+    position: absolute;
+    left: -9999px;
+    visibility: hidden;
+  }
+
+/* mobile devices Styles */
+@media (max-width: 767px) {
+    header {
+      height: 120px;
+      font-size: 18px;
+    }
+  
+    .link {
+      font-size: 16px;
+    }
+  
+    .budget {
+      flex-direction: column;
+    }
+    
+    .lists {
+      flex-wrap: wrap;
+      justify-content: center;
+      text-align: center;
+    }
+  }
+  
+  /* tablet devices Styles*/
+  @media (min-width: 768px) and (max-width: 1023px) {
+    header {
+      height: 130px;
+      font-size: 19px;
+    }
+  
+    .link {
+      font-size: 17px;
+    }
+  }
