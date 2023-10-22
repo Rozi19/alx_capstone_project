@@ -1,33 +1,42 @@
+/* body Styles */
 body {
-    background-color: #96deae;
+    background-color: #ffff;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-
-    padding: 20px;
-    gap: 20px;
-    
-
 }
 
-header, footer {
+/* header Styles */
+
+header {
     display: flex;
-    flex-direction: row;
-    gap: 1000px;
+    flex-direction: column;
     align-items: center;
-    padding: 10px;
-    background-color:  #50c878;
-    height: 100px; 
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 25px;
+    gap: 10px;
+    padding-bottom: 10px;
+    background-color:#4a90e2 ;
+    height: 150px; 
+    color: white;
+    font-size: 20px;
+    font-weight: bolder;
+    border-radius: 15px;
 
 }
 
+/* paragraph Styles */
+
+p {
+    font-size: 20px;
+    font-weight: bolder;
+}
+/* header welcome message Styles */
 .welcome {
     display: flex;
-    padding: 5px;
-    margin-left: 20px;
+    font-size: 20px;
+    font-weight: bold;
 }
+
+/* header links Styles */
 
 .links {
     display: flex;
@@ -38,74 +47,103 @@ header, footer {
 
 .link {
     display: inline-block;
+    padding: 12px 24px;
+    background-color: #ffff;
+    color: #4a90e2;
+    font-size: 18px;
     text-decoration: none;
-    border: 1px solid black;
-    padding: 5px 10px;
-    background-color: #f2f2f2;
-    color: #333;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+
+.link:hover {
+    background-color: #f1f1f1;
   }
   
+/* main Styles */
+
 main {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    padding: 23px;
-    gap: 20px;
+    padding: 10px;
+    gap: 10px;
     
 }
+/* heading Styles */
+h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #4a90e2;
+}
 
+/* main three container Styles */
 .cate_pay, .use_graph, .spend_high {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 10px;
     justify-content: center;
     align-items: center;
 }
 
-
+/* main category container Styles */
 .category {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1px;
-    background-color: #50c878;
+    background-color: #f1f1f1 ;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding: 20px;
     height: 450px;
-    width: 350px;
-    border-radius: 25px;
-    overflow-y: auto; /* Add scrollbar to vertical overflow */
-  }
+    width: 380px;
+    border-radius: 15px;
+    overflow: auto;
+}
 
+/* main use container Styles */
 .use {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #50c878;
+    justify-content: center;
+    gap: 1px;
+    background-color: #f1f1f1 ;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    padding: 5px;
+    padding: 10px;
     height: 230px;
-    width: 550px;
-    border-radius: 25px;
+    width: 580px;
+    border-radius: 15px;
 }
 
 .usage {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  font-weight: bolder;
+  gap: 10px;
 }
+
+/* main total budget container Styles */
+.total_budget {
+  display:flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+/* main spending container Styles */
 .spending {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1px;
-    background-color: #50c878;
+    background-color: #f1f1f1 ;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding: 20px;
     height: 350px;
-    width: 350px;
-    border-radius: 25px;
+    width: 380px;
+    border-radius: 15px;
 }
 .spending_form {
     display: flex;
@@ -117,83 +155,180 @@ main {
     font-weight: bold;
 }
 
+/* input filed Styles */
 .input_text{
     display: flex;
     flex-direction: row;
     justify-content: center;
     gap: 10px;
 }
+
+/* main payment container Styles */
 .payment {
     display: flex;
     justify-content: center;
-    background-color: #50c878;
+    background-color: #f1f1f1 ;
     height: 350px;
-    width: 380px;
+    width: 410px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 25px;
+    border-radius: 15px;
 
 }
 
+/* main graph container Styles */
 .graph {
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    background-color: #50c878;
-    height: 630px;
+    justify-content: center;
+    background-color: #f1f1f1 ;
+    height: 580px;
     width: 580px;
+    padding: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 25px;
-    gap:10px;
-}
-.total_budget {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    align-items: center;
-    justify-content: center;
-    font-weight: bolder;
-    font-size: 32px;
+    border-radius: 15px;
+
 }
 
+/* main high spending container Styles */
 .highest {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #50c878;
+    background-color: #f1f1f1 ;
     height: 450px;
-    width: 380px;
+    width: 410px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 25px;
+    border-radius: 15px;
+    font-weight: bold;
+    overflow: auto;
+
+}
+li {
+  font-size: 20px;
+}
+.invisible {
+  position: absolute;
+  left: -9999px;
+  visibility: hidden;
 }
 
+/* lable Styles */
+lable{
+  font-size: 30px;
+  color: #4a90e2;
+  font-weight:lighter;
+}
 
-.creat_account{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #f8f9fa;
-    border: 1px solid #e7e7e7;
-    padding: 50px;
-    
+/* input type Styles */
+input[type=text], input[type=number], input[type=date], select[name="spend_category"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 3px solid #ccc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
 }
-.budget{
-    display:flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 70px;
+
+input[type=number]:focus, input[type=text]:focus, input[type=date]:focus, select[name="spend_category"]:focus {
+  border: 3px solid #4a90e2;
 }
-.same{
-    background-color: #f8f9fa;
-    border: 1px solid #e7e7e7;
+
+/* button Styles */
+button {
+  padding: 10px 20px;
+  background-color: #4a90e2;
+  color: #f1f1f1;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #366db7;
+}
+
+/* report page Styles */
+.report {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+  background-color: #f1f1f1 ;
+  height: 350px;
+  width: 350px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  overflow: auto;
+}
+
+/* footer Styles */
+footer {
+    background-color: #333333;
     padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 300px;
-    height: 250px;
-}
+    text-align: center;
+    font-size: 14px;
+    color: #f1f1f1;
+    border-radius: 15px;
+  }
 
-
-
+ /* Mobile device Styles*/
+@media screen and (max-width: 767px) {
+    header {
+      height: auto;
+      padding: 10px;
+      font-size: 18px;
+    }
+  
+    .welcome {
+      font-size: 18px;
+    }
+  
+    .links {
+      flex-direction: column;
+    }
+  
+    main {
+      padding: 10px;
+    }
+  
+    .category,
+    .use,
+    .spending,
+    .payment,
+    .graph,
+    .highest, .report {
+      width: 100%;
+    }
+  
+    .payment {
+      height: auto;
+    }
+  }
+  
+  /* Tablet devices Styles*/
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    header {
+      height: auto;
+      padding: 10px;
+      font-size: 18px;
+    }
+  
+    .welcome {
+      font-size: 18px;
+    }
+  
+    .links {
+      flex-direction: column;
+    }
+  
+    main {
+      padding: 10px;
+    }
+  }
