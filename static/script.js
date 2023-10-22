@@ -1,21 +1,25 @@
+// Selecting input elements from the DOM
 const firstNameInput = document.querySelector('#fname');
 const lastNameInput = document.querySelector('#lname');
 const emailInput = document.querySelector('#email');
 const passwordInput = document.querySelector('#psw');
 const confirmPasswordInput = document.querySelector('#cpsw');
 
+// Selecting error message elements from the DOM
 const firstNameErrorElement = document.querySelector('#fnameError');
 const lastNameErrorElement = document.querySelector('#lnameError');
 const emailErrorElement = document.querySelector('#emailError');
 const passwordErrorElement = document.querySelector('#passwordError');
 const confirmPasswordErrorElement = document.querySelector('#confirmPasswordError');
 
+// Adding event listeners for input validation
 firstNameInput.addEventListener('blur', validateFirstName);
 lastNameInput.addEventListener('blur', validateLastName);
 emailInput.addEventListener('blur', validateEmail);
 passwordInput.addEventListener('blur', validatePassword);
 confirmPasswordInput.addEventListener('input', validateConfirmPassword);
 
+// Function to validate the first name input
 function validateFirstName() {
   const firstName = firstNameInput.value.trim();
 
@@ -28,6 +32,7 @@ function validateFirstName() {
   return true;
 }
 
+// Function to validate the last name input
 function validateLastName() {
   const lastName = lastNameInput.value.trim();
 
@@ -40,6 +45,7 @@ function validateLastName() {
   return true;
 }
 
+// Function to validate the email input
 function validateEmail() {
   const email = emailInput.value.trim();
 
@@ -57,6 +63,7 @@ function validateEmail() {
   return true;
 }
 
+// Function to validate the password input
 function validatePassword() {
   const password = passwordInput.value.trim();
 
@@ -77,6 +84,7 @@ function validatePassword() {
   return true;
 }
 
+// Function to validate the confirm password input
 function validateConfirmPassword() {
   const password = passwordInput.value.trim();
   const confirmPassword = confirmPasswordInput.value.trim();
@@ -95,21 +103,25 @@ function validateConfirmPassword() {
   return true;
 }
 
+// Helper function to check if an email is valid
 function isEmailValid(email) {
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailPattern.test(email);
 }
 
+// Helper function to check if a password is secure
 function isPasswordSecure(password) {
   const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/;
   return passwordPattern.test(password);
 }
 
+// Helper function to show an error message
 function showError(errorElement, message) {
   errorElement.textContent = message;
   errorElement.style.color = 'red';
 }
 
+// Helper function to clear an error message
 function showSuccess(errorElement) {
   errorElement.textContent = '';
 }
