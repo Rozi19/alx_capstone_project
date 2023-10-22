@@ -12,6 +12,7 @@ from sqlalchemy import ForeignKey
 Base = declarative_base()
 
 # User table representing users
+# mixin for adding user authentication
 class user(Base, UserMixin):
     __tablename__ = 'user'
 
