@@ -77,7 +77,6 @@ Users can interact with the application by recording their income sources and ex
 <br>
 <strong>Flow Chart</strong>
 <img src="Flow_char_budget_trucker.jpg" width="240" height="200">
-<strong>Prototype Figma Link:</strong> https://www.figma.com/file/h6j90rRW2vDstnogAZoYE8/Budget_Tracker?type=design&node-id=0%3A1&mode=design&t=lCIRdmHHAWSWAlfG-1
 <img src="prototype.png" width="200" height="650">
 <br>
 <h2>Contact information:</h2>
