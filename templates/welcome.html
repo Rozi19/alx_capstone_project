@@ -4,40 +4,66 @@
 {% endblock %}
 
 {% block content %}
+
+    <!-- script for graph -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Include the 'style.css' stylesheet for styling -->
     <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+
+    <!-- header section -->
     <header>
+
+        <!-- welcome container -->
         <div class="welcome">
+            <h2 id="welcomeid" class="invisible"> {{ id }} </h2>
             <h2>welcome {{ name }} </h2>
-            <h2 id="welcomeid"> {{ id }} </h2>
+            
         </div>
+
+        <!-- links container -->
         <div class="links">
             <a href="{{ url_for('startplaning') }}" class="link">Start planing</a>
-            <a href="#" class="link">view transaction</a>
+            <a href="{{ url_for('viewreport') }}" class="link">view transaction</a>
             <a href="{{ url_for('logout') }}" class="link">logout</a>
         </div>
     </header>
+
+    <!-- main section -->
     <main>
+
+        <!-- main category container -->
         <div class="cate_pay">
+
+            <!-- category container -->
             <div class="category">
                 <h1>Expense Breakdown</h1>
+
+                <!-- list expense and spending -->
                 <ul id="expense">
 
                 </ul>
             </div>
-            <div class="payment">
-                <h1>Alert payment </h1>
-            </div>
         </div>
+
+        <!-- main using and graph container -->
         <div class="use_graph">
+
+            <!-- using container -->
             <div class="use" id="use">
+
+                <!-- sub using container -->
                 <div class="usage" id="total_budget">
-                    <h2>Total Budgeted Expenses</h2>
+                    <h2>Total spending</h2>
                 </div>
+
+                <!-- sub using container -->
                 <div class="usage" id="remaining_budget">
-                    <h2>Remaining Budgeted Expenses</h2>
+                    <h2>Remaining Planned Expenses</h2>
                 </div>
             </div>
+
+            <!-- Graph container -->
             <div class="graph" id="graph">
                 <h1>Budget Tracker</h1>
                 <canvas id="budget_chart" class="myChart" style="width: 400px; height: 400px;"></canvas>
@@ -47,32 +73,44 @@
                 <div id="budget" class="total_budget"> 
                     <p>Total Expense</p>
                 </div>
-               
-                
-                
             </div>
         </div>
+
+        <!-- spening high container -->
         <div class="spend_high">
+
+            <!-- spending container -->
             <div class="spending">
-                <h1>how much do you spend</h1>
+                <h1>How much do you spend??</h1>
+                <!-- form container -->
                 <form class="spending_form" href="#" method="POST">
+
+                    <!-- category dropdown list container -->
                     <div class="input_text">
                     <lable for="category">Category</lable>
                     <select id="dropdown" name="spend_category"></select>
                     </div>
+
+                    <!-- amount input container -->
                     <div class="input_text">
                     <lable for="amount">Amount</lable>
                     <input type="number" placeholder="How much do you spend" name="spend_amount">
                     </div>
+
+                    <!-- date input container -->
                     <div class="input_text">
                     <lable for="date">Date</lable>
                     <input type="date" name="spend_date">
                     </div>
+
+                    <!-- button container -->
                     <div class="input_text">
                     <button type="submit" name="addspend">Add spending</button>
                     </div>
                 </form>
             </div>
+
+            <!-- Highest container -->
             <div class="highest">
                 <h1>Highest spending</h1>
                 <ul id="highest">
@@ -82,7 +120,17 @@
         </div>
     </main>
     <footer>
-        <p>Social Media</p>
+        <!-- Copyright notice -->
+        <p>&copy; 2023 Budget Tracker. All rights reserved.</p>
+        <!-- Social media links -->
+        <div class="social-media">
+            <a href="https://github.com/Rozi19"><img src="github-icon.png" alt="github" class="social-icon"></a>
+            <a href="https://www.linkedin.com/in/roza-alene-b3605b279?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BPMRWaTanSbW6B7aQs6NkwA%3D%3D"><img src="image/linkedin-icon.png" alt="LinkedIn" class="social-icon"></a>
+            <a href="https://x.com/rozaalene"><img src="image/twitter-icon.png" alt="Twitter" class="social-icon"></a>
+            <a href="https://t.me/Rozi29"><img src="image/telegram-icon.png" alt="Telegram" class="social-icon"></a>
+        </div>
     </footer>
+
+    <!-- Include the 'welcome.js' javascript for interaction -->
     <script src="{{url_for('static', filename='welcome.js')}}"></script>
 {% endblock %}
