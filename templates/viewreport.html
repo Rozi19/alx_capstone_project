@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Start Planning
+{% endblock %}
+{% block content %}
+    
+    <!-- Include the 'style.css' stylesheet for styling -->
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+
+    <!-- Header section -->
+    <header>
+
+        <!-- welcome container -->
+        <div class="welcome">
+            <h2>welcome {{ name }} </h2>
+            <h2 id="welcomeid"> {{ id }} </h2>
+        </div>
+
+        <!-- links container -->
+        <div class="links">
+            <a href="{{ url_for('startplaning') }}" class="link">Start planing</a>
+            <a href="{{ url_for('welcome') }}" class="link">Track Spanding</a>
+            <a href="{{ url_for('logout') }}" class="link">logout</a>
+        </div>
+    </header>
+
+    <!-- main section -->
+    <main>
+       
+        <!-- report income container -->
+        <div class="report">
+            <h1>Income Report</h1>
+
+            <!-- income lists -->
+            <ul>
+                {% for incomes in income %}
+                <li> {{ incomes.category }} {{ incomes.amount }}  </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- report expense container -->
+        <div class="report">
+            <h1>Export Report</h1>
+
+            <!-- expense lists -->
+            <ul>
+                {% for expenses in expense %}
+                <li> {{ expenses.category }} {{ expenses.amount }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- report spending container -->
+        <div class="report">
+            <h1>Spending Report</h1>
+
+            <!-- spending lists -->
+            <ul>
+                {% for spend in spending %}
+                <li> on {{ spend.date }} {{ spend.amount }} was spend for {{ spend.category }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </main>
+{% endblock %}
