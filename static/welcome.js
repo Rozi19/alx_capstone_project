@@ -113,7 +113,7 @@ fetch('/get_expensejson')
         const sortedSpendings = Object.entries(similarspendings)
           .sort((a, b) => b[1] - a[1]);
 
-        // Displaying the top three spendings
+        // Displaying the shored spendings
         sortedSpendings.forEach(([category, amount]) => {
           spend_sum += amount;
           console.log(expense.amount)
